@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 215 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+
+    --primary: 195 85% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 195 85% 55%;
+    --primary-dark: 195 85% 35%;
+
+    --secondary: 210 20% 95%;
+    --secondary-foreground: 215 25% 20%;
+
+    --muted: 210 15% 92%;
+    --muted-foreground: 215 15% 50%;
+
+    --accent: 175 70% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 15% 88%;
+    --input: 210 15% 90%;
+    --ring: 195 85% 45%;
+
+    --radius: 0.75rem;
+
+    /* Chat specific tokens */
+    --chat-user-bg: 195 85% 45%;
+    --chat-user-fg: 0 0% 100%;
+    --chat-assistant-bg: 0 0% 100%;
+    --chat-assistant-fg: 215 25% 15%;
+    --chat-border: 210 15% 88%;
+
+    /* Upload area tokens */
+    --upload-bg: 0 0% 100%;
+    --upload-border: 195 85% 45%;
+    --upload-hover-bg: 195 85% 96%;
+
+    /* Sidebar tokens */
+    --sidebar-background: 215 25% 20%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 195 85% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 25% 25%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 215 20% 30%;
+    --sidebar-ring: 195 85% 45%;
+  }
+
+  .dark {
+    --background: 215 25% 12%;
+    --foreground: 210 20% 98%;
+
+    --card: 215 25% 15%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 215 25% 15%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 195 85% 50%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 195 85% 60%;
+    --primary-dark: 195 85% 40%;
+
+    --secondary: 215 25% 18%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 215 20% 20%;
+    --muted-foreground: 215 15% 65%;
+
+    --accent: 175 70% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 85% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 20% 25%;
+    --input: 215 20% 22%;
+    --ring: 195 85% 50%;
+
+    /* Chat specific tokens */
+    --chat-user-bg: 195 85% 45%;
+    --chat-user-fg: 0 0% 100%;
+    --chat-assistant-bg: 215 25% 18%;
+    --chat-assistant-fg: 210 20% 98%;
+    --chat-border: 215 20% 25%;
+
+    /* Upload area tokens */
+    --upload-bg: 215 25% 15%;
+    --upload-border: 195 85% 45%;
+    --upload-hover-bg: 215 25% 20%;
+
+    /* Sidebar tokens */
+    --sidebar-background: 215 25% 10%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 195 85% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 25% 15%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 215 20% 20%;
+    --sidebar-ring: 195 85% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
