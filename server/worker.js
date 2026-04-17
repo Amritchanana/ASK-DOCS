@@ -103,3 +103,16 @@ const worker = new Worker(
     console.log("Job completed successfully");
 }, { concurrency: 2, connection: redisConfig }
 );
+// render free tier issue
+import express from 'express';
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+  res.send('Worker alive');
+});
+
+app.listen(PORT, () => {
+  console.log(`Worker HTTP server running on ${PORT}`);
+});
