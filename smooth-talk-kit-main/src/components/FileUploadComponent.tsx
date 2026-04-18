@@ -3,7 +3,7 @@ import { Upload, FileText, CheckCircle2, Loader2 } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-
+import { API_BASE_URL } from '@/lib/config';
 const FileUploadComponent: React.FC = () => {
   const [isUploading, setIsUploading] = React.useState(false);
   const [uploadedFile, setUploadedFile] = React.useState<string | null>(null);
@@ -23,7 +23,7 @@ const FileUploadComponent: React.FC = () => {
             const formData = new FormData();
             formData.append('pdf', file);
 
-            const API = import.meta.env.VITE_API_URL;
+            const API = import.meta.env.API_BASE_URL;
             const response = await fetch(`${API}/upload/pdf`, {
               method: 'POST',
               body: formData,
