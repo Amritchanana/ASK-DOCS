@@ -23,8 +23,7 @@ const FileUploadComponent: React.FC = () => {
             const formData = new FormData();
             formData.append('pdf', file);
 
-            const API = import.meta.env.API_BASE_URL;
-            const response = await fetch(`${API}/upload/pdf`, {
+            const response = await fetch(`${API_BASE_URL}/upload/pdf`, {
               method: 'POST',
               body: formData,
             });
