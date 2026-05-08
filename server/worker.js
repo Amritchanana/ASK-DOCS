@@ -68,7 +68,7 @@ const worker = new Worker(
     const vectorStore = await QdrantVectorStore.fromExistingCollection(
         embeddings,
         {
-            url: 'https://19aa4551-ebbf-46ae-bd9b-f104ecc3337a.eu-west-2-0.aws.cloud.qdrant.io',
+            url: 'https://ccdf3920-4114-46af-8c23-9f919cb9937c.eu-west-2-0.aws.cloud.qdrant.io',
             apiKey: process.env.QDRANT_API_KEY,
             collectionName: `pdf-collection`,
             vectorName: 'Default'
