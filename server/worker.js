@@ -7,6 +7,8 @@ import {PDFLoader} from '@langchain/community/document_loaders/fs/pdf';
 // import {CharacterTextSplitter} from "@langchain/textsplitters";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import 'dotenv/config';
+import { existsSync } from 'fs';
+import { resolve } from 'path';
 
 // Use Upstash Redis URL from environment variable
 const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
@@ -22,8 +24,14 @@ const redisConfig = {
 console.log("Worker started");
 const worker = new Worker(
     'file-upload-queue', async (job) => {
-  console.log(`Job:`, job.data);
-  const data= JSON.parse(job.data)
+  try {
+    console.log(`Job:`, job.data);
+    // Handle both string and object data
+    let data = job.data;
+    if (typeof data === 'string') {
+      data = JSON.parse(data);
+    }
+    console.log(`Parsed data:`, data);
 
     /*
     1) Path: data.path
@@ -34,9 +42,16 @@ const worker = new Worker(
     */
 
     // load the PDF
-    //const loader = new PDFLoader(data.path);
-    // const docs = await loader.load(); 
-    const loader = new PDFLoader(data.path, {
+    console.log(`Loading PDF from path: ${data.path}`);
+    
+    // Check if file exists
+    const filePath = resolve(data.path);
+    if (!existsSync(filePath)) {
+        throw new Error(`PDF file not found at: ${filePath}`);
+    }
+    console.log(`File exists at: ${filePath}`);
+    
+    const loader = new PDFLoader(filePath, {
         splitPages: true,
     });
     const docs = await loader.load();
@@ -101,8 +116,29 @@ const worker = new Worker(
     */
 
     console.log("Job completed successfully");
-}, { concurrency: 2, connection: redisConfig }
-);
+  } catch (error) {
+    console.error("Error processing job:", error.message);
+    console.error("Stack trace:", error.stack);
+    throw error;
+  }
+}, { 
+    concurrency: 2, 
+    connection: redisConfig,
+    settings: {
+        maxStalledCount: 2,
+        stalledInterval: 5000,
+        maxStalledCount: 10
+    }
+});
+
+worker.on('failed', (job, err) => {
+    console.error(`Job ${job.id} failed:`, err.message);
+});
+
+worker.on('completed', (job) => {
+    console.log(`Job ${job.id} completed`);
+});
+
 // render free tier issue
 import express from 'express';
 
